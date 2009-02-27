@@ -4,6 +4,8 @@ use warnings;
 package Jifty::Plugin::Comment;
 use base qw/ Jifty::Plugin /;
 
+our $VERSION = '0.01';
+
 __PACKAGE__->mk_accessors( qw/ akismet scrubber scrub_message / );
 
 use HTML::Scrubber;
