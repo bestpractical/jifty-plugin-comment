@@ -1,11 +1,11 @@
-use inc::Module::Install 0.46;
+use inc::Module::Install;
 name('Jifty-Plugin-Comment');
-version_from('lib/Jifty/Plugin/Comment.pm');
+all_from('lib/Jifty/Plugin/Comment.pm');
 
 requires('Jifty');
 
 auto_install();
-tests(qw( t/*/t/*.t ));
+tests('t/*.t t/*/t/*.t');
 
 install_share;
 

@@ -20,7 +20,7 @@ Setup the F<config.yml>
 
   Plugins:
     - Comment:
-      
+
       # Set this if you want spam checking by Net::Akismet
       Akismet:
         Key: 1234567890a
@@ -44,7 +44,7 @@ Setup the F<config.yml>
 Setup a model that has comments:
 
   package App::Model::Fooble;
-  
+
   use Jifty::DBI::Schema;
   use App::Record schema {
       column scribble => type is 'text';
