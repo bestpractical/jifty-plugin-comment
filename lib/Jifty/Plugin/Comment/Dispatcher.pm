@@ -28,7 +28,7 @@ sub setup_parent_object() {
         my ($parent_class, $parent_id) = @_;
         if (get 'comment_upon') {
             my $comment_upon = get 'comment_upon';
-            ($parent_class, $parent_id) = $comment_upon =~ /^([\w:]+)-(\d)$/;
+            ($parent_class, $parent_id) = $comment_upon =~ /^([\w:]+)-(\d+)$/;
         }
         else {
             $parent_class = get 'parent_class';
