@@ -137,7 +137,7 @@ use Jifty::Record schema {
         ;
 
     column published =>
-        type is 'boolean',
+        type is 'bool',
         label is 'Published?',
         is mandatory,
         default is 't',
