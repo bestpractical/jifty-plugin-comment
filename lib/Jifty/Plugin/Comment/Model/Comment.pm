@@ -140,7 +140,7 @@ use Jifty::Record schema {
         type is 'boolean',
         label is 'Published?',
         is mandatory,
-        default is 1,
+        default is 't',
         ;
 
     column status =>
