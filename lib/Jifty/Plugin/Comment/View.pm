@@ -199,7 +199,7 @@ template '__comment/add' => sub {
                     };
                 };
 
-                div {
+                div { { class is 'comment-body' };
                     my $body = $action->argument_value('body')
                             || 'No Body';
 
