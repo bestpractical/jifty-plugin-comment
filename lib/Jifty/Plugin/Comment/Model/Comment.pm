@@ -205,9 +205,9 @@ sub before_create {
 
     $args->{'created_on'}      = DateTime->now;
 
-    $args->{'ip_addr'}         = $ENV{'REMOTE_ADDR'};
-    $args->{'http_user_agent'} = $ENV{'HTTP_USER_AGENT'};
-    $args->{'http_referer'}    = $ENV{'HTTP_REFERER'};
+    $args->{'ip_addr'}         = Jifty->web->request->address;
+    $args->{'http_user_agent'} = Jifty->web->request->user_agent;
+    $args->{'http_referer'}    = Jifty->web->request->referer;
 
     # Prep for Akismet check or stop
     my $akismet = $plugin->akismet or return 1;
