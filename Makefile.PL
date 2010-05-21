@@ -8,7 +8,6 @@ requires('MIME::Base64::URLSafe');
 requires('Regexp::Common');
 requires('Regexp::Common::URI');
 requires('Regexp::Common::Email::Address');
-requires('CGI::Cookie');
 
 auto_install();
 tests('t/*.t t/*/t/*.t');

@@ -158,7 +158,6 @@ use Jifty::Action::Record::Create schema {
         ;
 };
 
-use CGI::Cookie;
 use MIME::Base64::URLSafe;
 #use Contentment::Notification::CommentPublished;
 #use Contentment::Notification::CommentNeedsModeration;
@@ -208,14 +207,11 @@ sub take_action {
         my $email = urlsafe_b64encode(
             $self->argument_value('email'));
 
-        my $cookie = CGI::Cookie->new(
-            -path    => '/',
-            -name    => 'COMMENT_REMEMBORY',
-            -value   => join('.', $your_name, $web_site, $email),
-            -expires => '+3M',
-        );
-
-        Jifty->web->response->add_header( 'Set-Cookie' => $cookie->as_string );
+        Jifty->web->response->cookies->{COMMENT_REMEMBORY} = {
+            path    => '/',
+            value   => join('.', $your_name, $web_site, $email),
+            expires => '+3M',
+        };
 
         $self->SUPER::take_action(@_);
 
@@ -274,15 +270,8 @@ Creating a comment this way causes a cookie named "COMMENT_REMEMBORY" to be stor
 
 =cut
 
-my $comment_cookie;
 sub fetch_comment_cookie {
-    return $comment_cookie if defined $comment_cookie;
-
-    my %cookies = CGI::Cookie->fetch;
-    $comment_cookie 
-        = $cookies{'COMMENT_REMEMBORY'} ? $cookies{'COMMENT_REMEMBORY'} : '';
-
-    return $comment_cookie;
+    return Jifty->web->request->cookies->{COMMENT_REMEMBORY};
 }
 
 =head2 from_cookie
@@ -303,7 +292,7 @@ sub from_cookie {
         );
     }
 
-    elsif (my $value = eval { fetch_comment_cookie()->value }) {
+    elsif (my $value = fetch_comment_cookie() ) {
         my @fields = split /\./, $value;
 
         if (defined $fields[ $pos ]) {
